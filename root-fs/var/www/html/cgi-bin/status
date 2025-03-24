@@ -1,0 +1,33 @@
+#!/bin/sh
+cd "$(dirname "${0}")/.."
+title="$(grep "<title>" ./index.html | cut -d">" -f2 | cut -d"<" -f1)"
+
+#===============================================================================
+# BEGIN OUTPUT
+# IMPORTANT - set the content type first, then an empty newline!
+echo "Content-type: text/html; charset=UTF-8"
+echo "Status: 200 OK"
+echo ""
+echo ""
+
+# BEGIN PAGE HTML
+echo "<!DOCTYPE html>"
+echo "<html>"
+echo "<head><title>$title</title></head>"
+echo "<body>"
+echo "<h1>$title</h1>"
+echo "<hr/>"
+echo '<pre>'
+echo "# System:"
+uname -a
+echo -n 'user = '; whoami
+cat /etc/os-release
+echo ""
+echo "# Environment variables:"
+env | sort -u
+echo "</pre>"
+echo "<hr/>"
+echo "</body>"
+echo "</html>"
+echo ""
+echo ""
