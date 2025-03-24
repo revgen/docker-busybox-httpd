@@ -1,4 +1,7 @@
-# 🐳 Busybox HTTPD Server Docker Image
+# 🐳 [Busybox HTTPD Server Docker Image](https://github.com/revgen/docker-busybox-httpd)
+
+[![Build Docker Image](https://github.com/revgen/docker-busybox-httpd/actions/workflows/docker.yml/badge.svg)](https://hub.docker.com/r/rev9en/busybox-httpd/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 This is a bare bones Docker image based on alpine that serves HTTP content using [busybox’s](https://busybox.net/) [httpd](https://oldwiki.archive.openwrt.org/doc/howto/http.httpd) command.
 
@@ -32,3 +35,4 @@ make serve
 * [Busybox documentation](https://www.busybox.net/downloads/BusyBox.html)
 * [Busybox HTTPD](https://oldwiki.archive.openwrt.org/doc/howto/http.httpd)
 * [Docker alpine official page](https://hub.docker.com/_/alpine)
+
