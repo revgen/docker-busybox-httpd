@@ -12,13 +12,15 @@ You can override the configuration file in /etc/httpd.conf.
 
 ## Usage
 
+To run httpd in the current directory:
+
 ```bash
-@docker run -it --rm -d \
+docker run -d \
     --restart=unless-stopped \
     --hostname "Simple Server" \
     -p 8080:80 \
-    -v "<home>/wwwroot:/var/www/html" \
-    --health-cmd "echo -e "GET /cgi-bin/healthcheck HTTP/1.0\n\n" | nc localhost 80 | grep "status" | grep "OK" || exit 1" \
+    -v "$(pwd):/var/www/html" \
+    --health-cmd "echo -e 'GET /cgi-bin/healthcheck HTTP/1.0\n\n' | nc localhost 80 | grep 'status' | grep 'OK' || exit 1" \
     --health-interval 30s --health-timeout 10s --health-retries 3 \
     --name busybox-httpd rev9en/busybox-httpd
 ```
