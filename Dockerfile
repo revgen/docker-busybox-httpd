@@ -1,7 +1,7 @@
-FROM alpine:3.8
+FROM busybox
 
 ARG NAME="rev9en/busybox-httpd"
-ARG VERSION="1.0.1"
+ARG VERSION="1.0.2"
 
 LABEL version="${VERSION}"
 LABEL description="Docker image with Busybox httpd"
@@ -10,13 +10,12 @@ LABEL maintainer="Evgen Rusakov"
 LABEL url.docker="https://hub.docker.com/r/rev9en/busybox-httpd"
 LABEL url.source="https://github.com/revgen/docker/docker-busybox-httpd"
 
-RUN apk add --no-cache tini busybox-extras
-
+ENV IMAGE_NAME="${NAME}"
+ENV IMAGE_VERSION="${VERSION}"
 COPY root-fs/ /
 
 EXPOSE 80
 
 WORKDIR /var/www/html
 
-ENTRYPOINT ["/sbin/tini", "-g", "--"]
-CMD [ "httpd", "-f", "-h", "/var/www/html", "-p", "80", "-c", "/etc/httpd.conf" ]
+ENTRYPOINT ["/entrypoint.sh"]

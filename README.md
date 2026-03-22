@@ -13,21 +13,22 @@ You can override the configuration file in /etc/httpd.conf.
 ## Usage
 
 ```bash
-docker run -it --rm \
+@docker run -it --rm -d \
+    --restart=unless-stopped \
+    --hostname "Simple Server" \
     -p 8080:80 \
-    -v "<home>/wwwroot:/var/www/html"
+    -v "<home>/wwwroot:/var/www/html" \
+    --health-cmd "echo -e "GET /cgi-bin/healthcheck HTTP/1.0\n\n" | nc localhost 80 | grep "status" | grep "OK" || exit 1" \
+    --health-interval 30s --health-timeout 10s --health-retries 3 \
     --name busybox-httpd rev9en/busybox-httpd
 ```
 
 After that a regular http server will be available on [http://localhost:8080](http://localhost:8080).
 
-## Build locally
+## Development
 
-```bash
-make build
-
-make serve
-```
+* Build an image: ```make build```
+* Run image locally: ```make serve```
 
 ## Links
 
